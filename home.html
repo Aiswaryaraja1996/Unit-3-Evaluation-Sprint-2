@@ -111,6 +111,8 @@
         createPagination();
         btn.addEventListener("click", () => {
           event.preventDefault();
+          page = 1;
+
           cont.innerHTML = null;
           handleSearch();
         });
@@ -155,6 +157,7 @@
 
       const handleSearch = async () => {
         try {
+          createPagination();
           const userName = document.getElementById("user").value;
           const res = await getUsers(userName, page, limit);
           display(res.items);
