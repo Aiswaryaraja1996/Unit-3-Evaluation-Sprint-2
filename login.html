@@ -54,7 +54,7 @@
           const res = await handleLogin(payLoad);
           if(res.token){
               alert("Login Successful");
-              location.href("./home.html");
+              window.location.replace("./home.html");
           }
         } catch(e) {
             console.log(e.message);

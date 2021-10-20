@@ -5,16 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HOME</title>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      header {
+        height: 100px;
+        width: 100%;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      input {
+        padding: 10px;
+        border-radius: 5px;
+      }
+      input[type="text"] {
+        width: 500px;
+      }
+    </style>
   </head>
   <body>
-    <header></header>
-    <form>
-      <input
-        type="text"
-        name="search"
-        placeholder="Search for any users on github.com"
-      />
-      <input type="submit" value="Search" id="search" />
-    </form>
+    <header>
+      <form>
+        <input
+          id="user"
+          type="text"
+          name="search"
+          placeholder="Search for any users on github.com"
+        />
+        <input type="submit" value="Search" id="search" />
+      </form>
+    </header>
+
+    <div class="container"></div>
+
+    <script>
+      var page = 1;
+      var limit = 10;
+
+      window.addEventListener("load", () => {
+        var btn = document.getElementById("search-btn");
+        btn.addEventListener("click", () => {
+          event.preventDefault();
+          handleSearch();
+        });
+      });
+
+      const handleSearch = async () => {
+        try {
+          const userName = document.getElementById("user");
+          const res = await getUsers(user, page, limit);
+          console.log(res.items);
+        } catch (err) {
+          console.log(err.message);
+        }
+      };
+
+      const getUsers = (user, page, limit) => {
+          try{
+
+          }
+          catch (err) {
+              console.log(err.message);
+          }
+      };
+    </script>
   </body>
 </html>
