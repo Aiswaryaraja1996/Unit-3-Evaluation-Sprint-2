@@ -111,6 +111,7 @@
         createPagination();
         btn.addEventListener("click", () => {
           event.preventDefault();
+          cont.innerHTML = null;
           handleSearch();
         });
 
