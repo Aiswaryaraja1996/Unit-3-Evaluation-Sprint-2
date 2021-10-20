@@ -62,6 +62,24 @@
       img {
         max-width: 100%;
       }
+
+      #pagination {
+        width: 50%;
+        margin: 30px auto;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+      }
+      button {
+        padding: 5px;
+        background-color: black;
+        color: white;
+        outline: none;
+        border-style: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -76,13 +94,15 @@
         <input type="submit" value="Search" id="search" />
       </form>
     </header>
-
+    <div id="pagination"></div>
     <div id="container"></div>
 
     <script>
       var page = 1;
       var limit = 10;
       var cont = document.getElementById("container");
+      var pagination = document.getElementById("pagination");
+
 
       window.addEventListener("load", () => {
         var btn = document.getElementById("search");
@@ -91,10 +111,37 @@
           event.preventDefault();
           handleSearch();
         });
+
+        pagination.addEventListener("click", () => {
+            handlePagination();
+        })
       });
 
       const createPagination = () => {
-          
+        var prev = document.createElement("button");
+        prev.textContent = "PREVIOUS";
+        prev.name = page -1 ;
+
+        var current = document.createElement("button");
+        current.textContent = page;
+        current.name = page
+
+        var next = document.createElement("button");
+        next.textContent = "NEXT";
+        next.name = page + 1;
+
+        pagination.append(prev, current, next);
+      };
+
+      const handlePagination = async() =>{
+          try{
+
+
+          }
+          catch(err){
+              console.log(err.message);
+          }
+
       }
 
       const handleSearch = async () => {
