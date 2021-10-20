@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LOGIN</title>
     <style>
-        h1{
-            text-align: center;
-        }
+      h1 {
+        text-align: center;
+      }
 
-        form{
-            width:20%;
-            margin:0 auto;
-            display: flex;
-            flex-direction: column;
-            gap : 10px;
-        }
+      form {
+        width: 20%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
     </style>
   </head>
   <body>
@@ -25,16 +25,51 @@
       <label for="email">EMAIL</label>
       <input type="text" name="email" id="email" />
 
-      <label for="psswd">EMAIL</label>
+      <label for="psswd">PASSWORD</label>
       <input type="password" name="psswd" id="psswd" />
 
       <input type="submit" value="LOGIN" id="btnLogin" />
     </form>
 
     <script>
-        window.addEventListener("load", ()=>{
-            var btn = document.getElementById("btnLogin");
-        })
+      window.addEventListener("load", () => {
+        var btn = document.getElementById("btnLogin");
+        btn.addEventListener("click", () => {
+          event.preventDefault();
+          handleSubmit();
+        });
+      });
+
+      const handleSubmit = async () => {
+        try {
+            console.log(1);
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("psswd").value;
+
+          const payLoad = {
+            email,
+            password,
+          };
+          console.log(payLoad);
+          const res = await handleLogin(payLoad);
+          if(res.token){
+              alert("Login Successful");
+              location.href("./home.html");
+          }
+        } catch(e) {
+            console.log(e.message);
+        }
+      };
+      const handleLogin = (payLoad) => {
+        console.log(payLoad);
+        return fetch("https://reqres.in/api/login", {
+          method: "POST",
+          body: JSON.stringify(payLoad),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((res) => res.json());
+      };
     </script>
   </body>
 </html>

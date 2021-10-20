@@ -1,19 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>REGISTER</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>REGISTER</h1>
+      <h1>REGISTER</h1>
     </header>
     <form id="registrationForm">
-        
+      <form>
+        <label for="email">EMAIL</label>
+        <input type="text" name="email" id="email" />
 
+        <label for="psswd">PASSWORD</label>
+        <input type="password" name="psswd" id="psswd" />
+
+        <input type="submit" value="REGISTER" id="btnLogin" />
+      </form>
+
+      <script>
+        window.addEventListener("load", () => {
+          var btn = document.getElementById("btnLogin");
+          btn.addEventListener("click", () => {
+            event.preventDefault();
+            handleSubmit();
+          });
+        });
+
+        const handleSubmit = async () => {
+          try {
+            console.log(1);
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const payLoad = {
+              email,
+              password,
+            };
+            console.log(payLoad);
+            const res = await handleLogin(payLoad);
+            console.log(res);
+          } catch (e) {
+            console.log("Something went wrong");
+          }
+        };
+        const handleLogin = (payLoad) => {
+          console.log(payLoad);
+          return fetch("https://reqres.in/api/register", {
+            method: "POST",
+            body: JSON.stringify(payLoad),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then((res) => res.json());
+        };
+      </script>
     </form>
-    
-</body>
+  </body>
 </html>
