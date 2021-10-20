@@ -44,9 +44,12 @@
         justify-content: space-between;
       }
       .imgDiv {
-        width: 80%;
+        max-width: 100%;
 
         margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .card {
         width: 40%;
@@ -56,11 +59,11 @@
         justify-content: center;
         align-items: center;
         border: 1px solid black;
-        padding: 20px;
+        padding: 22px;
       }
 
       img {
-        max-width: 100%;
+        max-width: 60%;
       }
 
       #pagination {
@@ -103,7 +106,6 @@
       var cont = document.getElementById("container");
       var pagination = document.getElementById("pagination");
 
-
       window.addEventListener("load", () => {
         var btn = document.getElementById("search");
         createPagination();
@@ -113,18 +115,22 @@
         });
 
         pagination.addEventListener("click", () => {
-            handlePagination();
-        })
+          handlePagination();
+        });
       });
 
       const createPagination = () => {
+        pagination.innerHTML = null;
         var prev = document.createElement("button");
         prev.textContent = "PREVIOUS";
-        prev.name = page -1 ;
+        prev.name = page - 1;
+        if (page === 1) {
+          prev.disabled = true;
+        }
 
         var current = document.createElement("button");
         current.textContent = page;
-        current.name = page
+        current.name = page;
 
         var next = document.createElement("button");
         next.textContent = "NEXT";
@@ -133,16 +139,18 @@
         pagination.append(prev, current, next);
       };
 
-      const handlePagination = async() =>{
-          try{
-
-
-          }
-          catch(err){
-              console.log(err.message);
-          }
-
-      }
+      const handlePagination = () => {
+        try {
+          cont.innerHTML = null;
+          var pageNum = parseInt(event.target.name, 10);
+          page = pageNum;
+          const user = document.getElementById("user").value;
+          createPagination();
+          handleSearch(user, page, limit);
+        } catch (err) {
+          console.log(err.message);
+        }
+      };
 
       const handleSearch = async () => {
         try {
@@ -180,10 +188,10 @@
 
         imgDiv.appendChild(img);
 
-        const h3 = document.createElement("h3");
+        const h3 = document.createElement("h4");
         h3.textContent = item.login;
 
-        const h3_2 = document.createElement("h3");
+        const h3_2 = document.createElement("h4");
         h3_2.textContent = item.url;
 
         div.append(imgDiv, h3, h3_2);
